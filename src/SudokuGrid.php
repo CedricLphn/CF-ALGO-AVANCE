@@ -1,8 +1,8 @@
 <?php
 
-class SudokuGrid implements GridInterface
+class SudokuGrid implements SudokuGrid
 {
-    private $data;
+    private $_data;
 
     /**
      * Charge un fichier en fournissant son chemin
@@ -23,7 +23,7 @@ class SudokuGrid implements GridInterface
      * @param array $data Tableau de données
      */
     public function __construct(array $data) {
-        $this->$data = $data; // $this->$data[ligne][colonne]
+        $this->_data = $data; // $this->$data[ligne][colonne]
         return true;
     }
 
@@ -55,4 +55,15 @@ class SudokuGrid implements GridInterface
 
 
     /* Insérer le code ici */
+    
+    /**
+     * Retourne les données d'une ligne à partir de son index
+     * @param int $rowIndex Index de ligne (entre 0 et 8)
+     * @return array Chiffres de la ligne demandée
+     */
+    public function row(int $rowIndex): array {
+        return $this->_data[$rowIndex];
+    }
+
+
 }
