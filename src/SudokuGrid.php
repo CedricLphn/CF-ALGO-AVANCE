@@ -27,6 +27,10 @@ class SudokuGrid implements GridInterface
         return true;
     }
 
+    /**
+     * Teste si la grille est pleine
+     * @return bool
+     */
     public function isFilled() : bool
     {
         $GridLength = count($_data);
@@ -49,7 +53,22 @@ class SudokuGrid implements GridInterface
             }
 
         }
-    /* Insérer le code ici */
+    
+    /**
+     * Retourne les données d'une colonne à partir de son index
+     * @param int $columnIndex Index de colonne (entre 0 et 8)
+     * @return array Chiffres de la colonne demandée
+     */
+    public function column(int $columnIndex): array{
+
+        $tmp = [];
+
+        for($i = 0; $i < 8; $i++) {
+            array_push($tmp, $this->get($i, $columnIndex));
+        }
+
+        return $tmp;
+    }
     
     /**
      * Retourne les données d'une ligne à partir de son index
@@ -74,7 +93,14 @@ class SudokuGrid implements GridInterface
         }
     }
 
-    public function get(int $rowIndex, int $columnIndex)
+
+    /**
+     * Retourne la valeur d'une cellule
+     * @param int $rowIndex Index de ligne
+     * @param int $columnIndex Index de colonne
+     * @return int Valeur
+     */
+    public function get(int $rowIndex, int $columnIndex) : int
     {
             return $this ->_data[$rowIndex][$columnIndex];
     }
