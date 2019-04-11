@@ -4,17 +4,26 @@ class SudokuGrid implements GridInterface
 {
     private $data;
 
+    /**
+     * Charge un fichier en fournissant son chemin
+     * @param string $filepath Chemin du fichier
+     * @return SudokuGrid|null Une instance de la classe si le fichier existe et est valide, null sinon
+     */
     public static function loadFromFile($filepath): ?SudokuGrid {
         if(!file_exists($filepath)) { return false; }
 
         $file = fopen($filepath, "r");
-        
+
         if(json_last_error() != JSON_ERROR_NONE) { return false; }
         return new SudokuGrid(json_decode(stream_get_contents($file)));
     }
 
+     /**
+     * Instancie une grille à partir d'un tableau de données
+     * @param array $data Tableau de données
+     */
     public function __construct(array $data) {
-        $this->$data = $data;
+        $this->$data = $data; // $this->$data[ligne][colonne]
         return true;
     }
     /* Insérer le code ici */
