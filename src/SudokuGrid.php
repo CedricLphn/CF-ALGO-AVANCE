@@ -27,7 +27,7 @@ class SudokuGrid implements GridInterface
         return true;
     }
 
-    function isFilled()
+    public function isFilled() : bool
     {
         $GridLength = count($Grid);
         $GridIsFull = false; 
@@ -48,11 +48,6 @@ class SudokuGrid implements GridInterface
             }
 
         }
-
-
-
-
-
 
     /* Insérer le code ici */
     
