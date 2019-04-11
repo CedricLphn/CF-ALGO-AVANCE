@@ -60,5 +60,17 @@ class SudokuGrid implements GridInterface
         return $this->_data[$rowIndex];
     }
 
+    /**
+     * Affecte une valeur dans une cellule
+     * @param int $rowIndex Index de ligne
+     * @param int $columnIndex Index de colonne
+     * @param int $value Valeur
+     */
+    public function set(int $rowIndex, int $columnIndex, int $value): void {
+
+        $this->_data[$rowIndex][$columnIndex] = $value;
+    }
+
+
 
 }
