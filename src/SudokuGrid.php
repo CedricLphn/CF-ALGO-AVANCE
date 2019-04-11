@@ -131,6 +131,14 @@ class SudokuGrid implements GridInterface
      * @return bool
      */
     public function isValid(): bool {
+        if (isFilled() == true)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
 
 
     }
@@ -141,7 +149,29 @@ class SudokuGrid implements GridInterface
      */
     public function display(): string {
 
-        $this->_data[]
+        $tmp = "";
+
+        // 1 ère méthode
+        // for ($i = 0; $i < 9 ; $i++)
+        // {
+        //     for ($j = 0; $j < 9 ; $j++)
+        //     {
+        //         $tmp += $this->get($i, $j);
+
+        //         if ($j % 9 == 0)
+        //         {
+        //             $tmp += PHP_EOL;
+        //         }
+        //     }
+        //     return $tmp;
+        // }
+
+        // 2 eme méthode
+        for ($i = 0; $i < 9 ; $i++)
+        {
+            $tmp += implode(" " ,$this->row($i)) . PHP_EOL;
+        }
+        return $tmp;
     }
 
 }
