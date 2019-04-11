@@ -108,20 +108,22 @@ class SudokuGrid
 
     public function getNextRowColumn(int $rowIndex, int $columnIndex) : array
     {
-        // if($columnIndex == 8)
-        // {
-        //     return $this ->_data[$rowIndex+1][$columnIndex = 0];
-        // }
-        // elseif($columnIndex < 8)
-        // {
-        //     return $this ->_data[$rowIndex][$columnIndex+1];
-        // }
-        // else 
-        // {
-        //     return $this ->_data[8][8];
-        // }
-
-        return [];
+        $pos = [];
+        if($columnIndex == 8 && $rowIndex != 8)
+        {
+            $pos = [$rowIndex+1, 0];
+            return $pos;
+        }
+        elseif ( $rowIndex == 8 && $columnIndex == 8 )
+        {
+            $pos = [$rowIndex, $columnIndex];
+            return $pos;
+        }
+        elseif($columnIndex < 8)
+        {
+            $pos = [$rowIndex, $columnIndex+1];
+            return $pos;
+        }
     }
 
 
