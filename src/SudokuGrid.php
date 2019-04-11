@@ -74,4 +74,19 @@ class SudokuGrid implements GridInterface
         }
     }
 
+    /**
+     * Teste si la grille est valide
+     * @return bool
+     */
+    public function isValid(): bool {
+
+
+    }
+
+    /**
+     * Génère l'affichage de la grille
+     * @return string
+     */
+    public function display(): string;
+
 }
