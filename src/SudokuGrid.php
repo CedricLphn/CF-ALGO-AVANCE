@@ -1,6 +1,6 @@
 <?php
 
-class SudokuGrid implements SudokuGrid
+class SudokuGrid implements GridInterface
 {
     private $_data;
 
