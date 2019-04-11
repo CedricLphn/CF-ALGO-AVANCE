@@ -115,7 +115,7 @@ class SudokuGrid implements GridInterface
         {
             return $this ->_data[$rowIndex+1][$columnIndex = 0];
         }
-        elseif($columnIndex < 9)
+        elseif($columnIndex < 8)
         {
             return $this ->_data[$rowIndex][$columnIndex+1];
         }
@@ -125,7 +125,7 @@ class SudokuGrid implements GridInterface
         }
     }
 
-    
+
     /**
      * Teste si la grille est valide
      * @return bool
