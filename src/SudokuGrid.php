@@ -63,7 +63,7 @@ class SudokuGrid implements GridInterface
 
         $tmp = [];
 
-        for($i = 0; $i < 8; $i++) {
+        for($i = 0; $i <= 8; $i++) {
             array_push($tmp, $this->get($i, $columnIndex));
         }
 
@@ -76,7 +76,9 @@ class SudokuGrid implements GridInterface
      * @return array Chiffres de la ligne demandée
      */
     public function row(int $rowIndex): array {
-        return $this->_data[$rowIndex];
+        if($rowIndex < 9) {
+            return $this->_data[$rowIndex];
+        }
     }
 
     /**
@@ -109,7 +111,7 @@ class SudokuGrid implements GridInterface
 
     public function getNextRowColumn(int $rowIndex, int $columnIndex)
     {
-        if( $columnIndex = 9)
+        if($columnIndex == 8)
         {
             return $this ->_data[$rowIndex+1][$columnIndex = 0];
         }
