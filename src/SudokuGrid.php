@@ -70,8 +70,8 @@ class SudokuGrid implements GridInterface
         if(isValueValidForPosition($rowIndex, $columnIndex, $value) == true)
         {
             $this->_data[$rowIndex][$columnIndex] = $value;
-            return true;
         }
+<<<<<<< HEAD
         else{
             return false;
         }
@@ -84,5 +84,8 @@ class SudokuGrid implements GridInterface
         }
 
 
+=======
+    }
+>>>>>>> master
 
 }
