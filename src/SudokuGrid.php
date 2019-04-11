@@ -71,8 +71,9 @@ class SudokuGrid implements GridInterface
         {
             $this->_data[$rowIndex][$columnIndex] = $value;
         }
+    }
 
-     function get(int $rowIndex, int $columnIndex)
+    public function get(int $rowIndex, int $columnIndex)
         {
             return $this ->_data[$rowIndex][$columnIndex];
 
