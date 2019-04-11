@@ -14,7 +14,7 @@ class SudokuGrid
 
         $file = fopen($filepath, "r");
 
-        if(json_last_error() != JSON_ERROR_NONE) { return false; }
+        if(json_last_error() != JSON_ERROR_NONE) { return null; }
         return new SudokuGrid(json_decode(stream_get_contents($file)));
     }
 
@@ -159,7 +159,7 @@ class SudokuGrid
         // 1 ère méthode
         // for ($i = 0; $i < 9 ; $i++)
         // {
-        //     for ($j = 0; $j < 9 ; $j++)
+        //     for ($j = 0; $j < 9; $j++)
         //     {
         //         $tmp += $this->get($i, $j);
 
@@ -177,6 +177,81 @@ class SudokuGrid
             $tmp = $tmp.implode(" ", $this->row($i)).PHP_EOL;
         }
         return $tmp;
+    }
+
+    /**
+     * Retourne les données d'un bloc à partir de son index
+     * L'indexation des blocs est faite de gauche à droite puis de haut en bas
+     * @param int $squareIndex Index de bloc (entre 0 et 8)
+     * @return array Chiffres du bloc demandé
+     */
+    public function square(int $squareIndex): array {
+        $square1 = [1 => [[0,1], [0,2]]];
+
+        $array = [];
+        
+        $imin = 0;
+        $imax = 2;
+        $jmin = 0;
+        $jmax = 2;
+
+        switch ($squareIndex) {
+            case 0:
+                $jmax = 2;
+                break;
+            case 1:
+                $jmin = 3;
+                $jmax = 5;
+                break;
+            case 2:
+                $jmin = 6;
+                $jmax = 8;
+                break;
+            case 3:
+                $imin = 3;
+                $imax = 5;
+                $jmax = 2;
+                break;
+            case 4:
+                $imin = 3;
+                $imax = 5;
+                $jmin = 3;
+                $jmax = 5;
+                break;
+            case 5:
+                $imin = 3;
+                $imax = 5;
+                $jmin = 6;
+                $jmax = 8;
+                break;
+            case 6:
+                $imin = 6;
+                $imax = 8;
+                $jmax = 2;
+                break;
+            case 7:
+                $imin = 6;
+                $imax = 8;
+                $jmin = 3;
+                $jmax = 5;
+                break;
+            default:
+                $imin = 6;
+                $imax = 8;
+                $jmin = 6;
+                $jmax = 8;
+                break;
+        }
+        $tmp = [];
+        for($i = $imin; $i <= $imax; $i++) {
+            for($j = $jmin; $j <= $jmax; $j++){
+                var_dump("$i");
+                array_push($tmp, [$i, $j]);
+            }
+            $array = $tmp;
+        }
+
+        return $array;
     }
 
 }
