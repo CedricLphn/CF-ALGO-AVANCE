@@ -40,7 +40,6 @@ class SudokuGrid implements GridInterface
                        return $GridIsFull; 
                     }
                     else {
-                        
                         $GridIsfull = true;
                         return $GridIsfull;
                     }
@@ -86,13 +85,19 @@ class SudokuGrid implements GridInterface
     {
         if( $columnIndex = 9)
         {
-            return $this ->_data[$rowIndex][$columnIndex +1];
+            return $this ->_data[$rowIndex+1][$columnIndex = 0];
+        }
+        elseif($columnIndex < 9)
+        {
+            return $this ->_data[$rowIndex][$columnIndex+1];
         }
         else 
         {
-            return $this ->_data[$rowIndex+1][$columnIndex];
+            return $this ->_data[8][8];
         }
     }
+
+    
     /**
      * Teste si la grille est valide
      * @return bool
