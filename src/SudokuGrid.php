@@ -135,35 +135,17 @@ class SudokuGrid
      * Teste si la grille est valide
      * @return bool
      */
-    // si isFilled == true 
-
-    //     une boucle x
-    //     $this->row(x);
-
-    //         foreach de la row
-
-    //             conditition
-    //             si != 0 
-    //             return true
-
-
-    // sinon return false
     public function isValid(): bool {
     
-        if(isFilled() == true)
+        for($i = 0; $i < 9; $i ++)
         {
-            for($i = 0; $i < 9; $i ++)
+            $element = $this->row(2);
+            if ($element[$i] == 0)
             {
-                $row = $this->row($i);
-                foreach ($row as $value) {
-                    if($value != 0)
-                    {
-                        return true;
-                    }
-                }
+                return false;
             }
-            return false;
         }
+        return true;
     }
 
     /**
