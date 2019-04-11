@@ -71,9 +71,6 @@ class SudokuGrid implements GridInterface
         {
             $this->_data[$rowIndex][$columnIndex] = $value;
         }
-        else{
-            return false;
-        }
 
      function get(int $rowIndex, int $columnIndex)
         {
@@ -95,7 +92,10 @@ class SudokuGrid implements GridInterface
      * Génère l'affichage de la grille
      * @return string
      */
-    public function display(): string;
+    public function display(): string {
+
+        $this->_data[]
+    }
 
 }
 
