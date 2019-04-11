@@ -33,20 +33,12 @@ class SudokuGrid
      */
     public function isFilled() : bool
     {
-        $GridIsFull = false; 
-            for ( $i = 0; $i < 9 ; $i ++)
-            {
-                for ( $j = 0; $j < 9 ; $j ++)
-                {
-                    if(!empty($this->_data[i][j]))
-                    {
-                       $GridIsFull = true; 
-                    }
-                    
-                }
-                
+        for($i = 0; $i < 9; $i++) {
+            if(!in_array(0, $this->row($i))) {
+                return true;
             }
-            return $GridIsFull;
+        }    
+        return false;
     }
     
     /**
@@ -83,11 +75,7 @@ class SudokuGrid
      * @param int $value Valeur
      */
     public function set(int $rowIndex, int $columnIndex, int $value): void {
-
-        if(isValueValidForPosition($rowIndex, $columnIndex, $value) == true)
-        {
-            $this->_data[$rowIndex][$columnIndex] = $value;
-        }
+        $this->_data[$rowIndex][$columnIndex] = $value;
     }
 
 
@@ -136,16 +124,61 @@ class SudokuGrid
      * @return bool
      */
     public function isValid(): bool {
-    
-        for($i = 0; $i < 9; $i ++)
-        {
-            $element = $this->row(2);
-            if ($element[$i] == 0)
-            {
+        if(!$this->isFilled()) { return false; }
+
+        $range = range(1,9);
+        // step 2 
+        for($i = 0; $i < 9; $i++) { // numbers
+            $tmp = $this->row($i);
+            $tmp2 = $this->column($i);
+            $tmp3 = $this->square($i);
+            sort($tmp);
+            sort($tmp2);
+            sort($tmp3);
+            if($tmp != $range || $tmp2 != $range) {
                 return false;
             }
         }
         return true;
+        
+    }
+
+    public function getSquareId(int $rowIndex, int $columnIndex) : int {
+
+        $square = 0;
+        if($rowIndex >= 0 && $rowIndex < 3 && $columnIndex >= 0 && $columnIndex < 3) 
+        {
+            $square = 0;
+        }elseif($rowIndex >= 0 && $rowIndex < 3 && $columnIndex > 2 && $columnIndex < 6) {
+            $square = 1;
+        }elseif($rowIndex >= 0 && $rowIndex < 3 && $columnIndex > 6 && $columnIndex <= 8) {
+            $square = 2;
+        }elseif($rowIndex >= 3 && $rowIndex <= 5 && $columnIndex >= 0 && $columnIndex <= 2) {
+            $square = 3;
+        }elseif($rowIndex >= 3 && $rowIndex <= 5 && $columnIndex >= 3 && $columnIndex <= 5) {
+            $square = 4;
+        }elseif($rowIndex >= 3 && $rowIndex <= 5 && $columnIndex >= 6 && $columnIndex <= 8) { 
+            $square = 5;
+        }elseif($rowIndex >= 6 && $rowIndex <= 8 && $columnIndex >= 0 && $columnIndex <= 2) {
+            $square = 6;
+        }elseif($rowIndex >= 6 && $rowIndex <= 8 && $columnIndex >= 3 && $columnIndex <= 5) {
+            $square = 7;
+        }elseif($rowIndex >= 6 && $rowIndex <= 8 && $columnIndex >= 6 && $columnIndex <= 8) {
+            $square = 8;
+        }
+
+        return $square;
+    }
+
+    public function isValueValidForPosition(int $rowIndex, int $columnIndex, int $value): bool {
+
+        if(!in_array($value, $this->row($rowIndex)) || !in_array($value, $this->column($columnIndex)) 
+        || !in_array($value, $this->square($this->getSquareId($rowIndex, $columnIndex))) ) {
+            return true;
+        }
+
+
+        return false;
     }
 
     /**
@@ -186,14 +219,16 @@ class SudokuGrid
      * @return array Chiffres du bloc demandé
      */
     public function square(int $squareIndex): array {
-        $square1 = [1 => [[0,1], [0,2]]];
-
         $array = [];
+
+        $j = 0;
         
         $imin = 0;
         $imax = 2;
         $jmin = 0;
         $jmax = 2;
+
+        
 
         switch ($squareIndex) {
             case 0:
@@ -245,8 +280,7 @@ class SudokuGrid
         $tmp = [];
         for($i = $imin; $i <= $imax; $i++) {
             for($j = $jmin; $j <= $jmax; $j++){
-                var_dump("$i");
-                array_push($tmp, [$i, $j]);
+                array_push($tmp, $this->get($i, $j));
             }
             $array = $tmp;
         }
