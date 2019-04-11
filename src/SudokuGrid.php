@@ -33,11 +33,10 @@ class SudokuGrid
      */
     public function isFilled() : bool
     {
-        $GridLength = count($this->_data);
         $GridIsFull = false; 
-            for ( $i = 0; $i < $GridLength ; $i ++)
+            for ( $i = 0; $i < 9 ; $i ++)
             {
-                for ( $j = 0; $j < $GridLength ; $j ++)
+                for ( $j = 0; $j < 9 ; $j ++)
                 {
                     if(!empty($this->_data[i][j]))
                     {
