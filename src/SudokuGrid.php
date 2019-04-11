@@ -67,8 +67,14 @@ class SudokuGrid implements GridInterface
      */
     public function set(int $rowIndex, int $columnIndex, int $value): void {
 
-        $this->_data[$rowIndex][$columnIndex] = $value;
-    }
+        if(isValueValidForPosition($rowIndex, $columnIndex, $value) == true)
+        {
+            $this->_data[$rowIndex][$columnIndex] = $value;
+            return true;
+        }
+        else{
+            return false;
+        }
 
     public function get(int $rowIndex, int $columnIndex)
         {
