@@ -18,6 +18,10 @@ class SudokuGrid
         return new SudokuGrid(json_decode(stream_get_contents($file)));
     }
 
+    public function getGrid(): array {
+        return $this->_data;
+    }
+
      /**
      * Instancie une grille à partir d'un tableau de données
      * @param array $data Tableau de données
