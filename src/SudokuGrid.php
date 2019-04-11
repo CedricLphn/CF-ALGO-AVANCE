@@ -46,9 +46,8 @@ class SudokuGrid
                 }
                 
             }
-            
-            return $GridIsfull;
-        }
+            return $GridIsFull;
+    }
     
     /**
      * Retourne les données d'une colonne à partir de son index
@@ -104,7 +103,13 @@ class SudokuGrid
     }
 
 
-
+    /**
+     * Retourne les coordonnées de la prochaine cellule à partir des coordonnées actuelles
+     * (Le parcours est fait de gauche à droite puis de haut en bas)
+     * @param int $rowIndex Index de ligne
+     * @param int $columnIndex Index de colonne
+     * @return array Coordonnées suivantes au format [indexLigne, indexColonne]
+     */
     public function getNextRowColumn(int $rowIndex, int $columnIndex) : array
     {
         $pos = [];
@@ -130,17 +135,35 @@ class SudokuGrid
      * Teste si la grille est valide
      * @return bool
      */
+    // si isFilled == true 
+
+    //     une boucle x
+    //     $this->row(x);
+
+    //         foreach de la row
+
+    //             conditition
+    //             si != 0 
+    //             return true
+
+
+    // sinon return false
     public function isValid(): bool {
-        if (isFilled() == true)
+    
+        if(isFilled() == true)
         {
-            return true;
-        }
-        else
-        {
+            for($i = 0; $i < 9; $i ++)
+            {
+                $row = $this->row($i);
+                foreach ($row as $value) {
+                    if($value != 0)
+                    {
+                        return true;
+                    }
+                }
+            }
             return false;
         }
-
-
     }
 
     /**
