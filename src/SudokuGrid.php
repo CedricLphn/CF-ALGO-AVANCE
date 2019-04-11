@@ -168,8 +168,7 @@ class SudokuGrid
         // 2 eme méthode
         for ($i = 0; $i < 9 ; $i++)
         {
-            $test = $this->row($i);
-            $tmp = $tmp.implode(" ", $test).PHP_EOL;
+            $tmp = $tmp.implode(" ", $this->row($i)).PHP_EOL;
         }
         return $tmp;
     }
