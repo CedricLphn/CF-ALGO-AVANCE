@@ -29,13 +29,13 @@ class SudokuGrid implements GridInterface
 
     public function isFilled() : bool
     {
-        $GridLength = count($Grid);
+        $GridLength = count($_data);
         $GridIsFull = false; 
             for ( $i = 0; $i < $GridLength ; $i ++)
             {
                 for ( $j = 0; $j < $GridLength ; $j ++)
                 {
-                    if(Empty($Grid[i][j]) == true)
+                    if(Empty($_data[i][j]) == true)
                     {
                        return $GridIsFull = false; 
                     }
@@ -48,7 +48,6 @@ class SudokuGrid implements GridInterface
             }
 
         }
-
     /* Insérer le code ici */
     
     /**
@@ -70,6 +69,13 @@ class SudokuGrid implements GridInterface
 
         $this->_data[$rowIndex][$columnIndex] = $value;
     }
+
+    public function get(int $rowIndex, int $columnIndex)
+        {
+            $this ->_data[$rowIndex][$columnIndex] = $value;
+            return $value;
+
+        }
 
 
 
