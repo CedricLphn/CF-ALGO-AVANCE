@@ -1,8 +1,8 @@
 <?php
 
-class SudokuGrid implements GridInterface
+class SudokuGrid 
 {
-    private $_data;
+    private $_data = [];
 
     /**
      * Charge un fichier en fournissant son chemin
@@ -10,7 +10,7 @@ class SudokuGrid implements GridInterface
      * @return SudokuGrid|null Une instance de la classe si le fichier existe et est valide, null sinon
      */
     public static function loadFromFile($filepath): ?SudokuGrid {
-        if(!file_exists($filepath)) { return false; }
+        if(!file_exists($filepath)) { return null; }
 
         $file = fopen($filepath, "r");
 
@@ -33,25 +33,22 @@ class SudokuGrid implements GridInterface
      */
     public function isFilled() : bool
     {
-        $GridLength = count($_data);
+        $GridLength = count($this->_data);
         $GridIsFull = false; 
             for ( $i = 0; $i < $GridLength ; $i ++)
             {
                 for ( $j = 0; $j < $GridLength ; $j ++)
                 {
-                    if(Empty($_data[i][j]) == true)
+                    if(!empty($this->_data[i][j]))
                     {
-                       return $GridIsFull; 
+                       $GridIsFull = true; 
                     }
-                    else {
-                        $GridIsfull = true;
-                        return $GridIsfull;
-                    }
-    
+                    
                 }
-    
+                
             }
-
+            
+            return $GridIsfull;
         }
     
     /**
@@ -76,9 +73,9 @@ class SudokuGrid implements GridInterface
      * @return array Chiffres de la ligne demandée
      */
     public function row(int $rowIndex): array {
-        if($rowIndex < 9) {
+        if($rowIndex < 9)
             return $this->_data[$rowIndex];
-        }
+        
     }
 
     /**
@@ -109,20 +106,22 @@ class SudokuGrid implements GridInterface
 
 
 
-    public function getNextRowColumn(int $rowIndex, int $columnIndex)
+    public function getNextRowColumn(int $rowIndex, int $columnIndex) : array
     {
-        if($columnIndex == 8)
-        {
-            return $this ->_data[$rowIndex+1][$columnIndex = 0];
-        }
-        elseif($columnIndex < 8)
-        {
-            return $this ->_data[$rowIndex][$columnIndex+1];
-        }
-        else 
-        {
-            return $this ->_data[8][8];
-        }
+        // if($columnIndex == 8)
+        // {
+        //     return $this ->_data[$rowIndex+1][$columnIndex = 0];
+        // }
+        // elseif($columnIndex < 8)
+        // {
+        //     return $this ->_data[$rowIndex][$columnIndex+1];
+        // }
+        // else 
+        // {
+        //     return $this ->_data[8][8];
+        // }
+
+        return [];
     }
 
 
