@@ -38,11 +38,11 @@ class SudokuGrid
     public function isFilled() : bool
     {
         for($i = 0; $i < 9; $i++) {
-            if(!in_array(0, $this->row($i))) {
-                return true;
+            if(in_array(0, $this->row($i))) {
+                return false;
             }
         }    
-        return false;
+        return true;
     }
     
     /**
@@ -110,9 +110,9 @@ class SudokuGrid
             $pos = [$rowIndex+1, 0];
             return $pos;
         }
-        elseif ( $rowIndex == 8 && $columnIndex == 8 )
+        elseif ( $rowIndex >= 8 && $columnIndex >= 8 )
         {
-            $pos = [$rowIndex, $columnIndex];
+            $pos = [8, 8];
             return $pos;
         }
         elseif($columnIndex < 8)
